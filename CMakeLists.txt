@@ -62,6 +62,7 @@ if(BUILD_EXAMPLES)
   add_subdirectory("examples/virtual_terminal/aux_inputs")
   add_subdirectory("examples/task_controller_client")
   add_subdirectory("examples/guidance")
+  add_subdirectory("examples/data_link_prove")
 endif()
 
 if(BUILD_TESTING)
