@@ -97,7 +97,6 @@ int main() {
     while (1) {
         std::string sentMsg = isobus::CANHardwareInterface::transmit_can_frame(classic_raw_frame)
         ? "success" : "fail";
-
         std::cout << "Sent classic can message! " << sentMsg << std::endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(DELAY_MS));
 
@@ -118,18 +117,6 @@ int main() {
         std::cout << "Sent 'j1939' 8 byte message! " << sentMsg << std::endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(DELAY_MS));
 
-        sentMsg = isobus::CANNetworkManager::CANNetwork.send_can_message_raw(
-            CAN_CHANNEL,
-            j1939_src_addr,
-            j1939_dst_addr,
-            j1939_pgn,
-            j1939_prio,
-            big_data.data(),
-            big_data.size()
-        ) ? "success" : "fail";
-        std::cout << "Sent 'j1939' 11 byte message! " << sentMsg << std::endl;
-        std::this_thread::sleep_for(std::chrono::milliseconds(DELAY_MS));
-        
         isobus::CANNetworkManager::CANNetwork.send_can_message(
             j1939_pgn,
             data.data(),
