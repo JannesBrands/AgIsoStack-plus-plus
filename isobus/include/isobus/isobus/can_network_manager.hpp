@@ -127,6 +127,23 @@ namespace isobus
 		                      void *parentPointer = nullptr,
 		                      DataChunkCallback frameChunkCallback = nullptr);
 
+		/// @brief Sends a CAN message using raw addresses.
+		/// @param[in] portIndex The CAN channel index to send the message from
+		/// @param[in] sourceAddress The source address to send the CAN message from
+		/// @param[in] destAddress The destination address to send the message to
+		/// @param[in] parameterGroupNumber The PGN to use when sending the message
+		/// @param[in] priority The CAN priority of the message being sent
+		/// @param[in] data A pointer to the data buffer to send from
+		/// @param[in] size The size of the message to send
+		/// @returns `true` if the message was sent, otherwise `false`
+		bool send_can_message_raw(std::uint32_t portIndex,
+		                          std::uint8_t sourceAddress,
+		                          std::uint8_t destAddress,
+		                          std::uint32_t parameterGroupNumber,
+		                          std::uint8_t priority,
+		                          const void *data,
+		                          std::uint32_t size) const;
+
 		/// @brief This is the main function used by the stack to receive CAN messages and add them to a queue.
 		/// @details This function is called by the stack itself when you call can_lib_process_rx_message.
 		/// @param[in] message The message to be received
@@ -339,23 +356,6 @@ namespace isobus
 		/// @brief Checks to see if any control function didn't claim during a round of
 		/// address claiming and removes it if needed.
 		void prune_inactive_control_functions();
-
-		/// @brief Sends a CAN message using raw addresses. Used only by the stack.
-		/// @param[in] portIndex The CAN channel index to send the message from
-		/// @param[in] sourceAddress The source address to send the CAN message from
-		/// @param[in] destAddress The destination address to send the message to
-		/// @param[in] parameterGroupNumber The PGN to use when sending the message
-		/// @param[in] priority The CAN priority of the message being sent
-		/// @param[in] data A pointer to the data buffer to send from
-		/// @param[in] size The size of the message to send
-		/// @returns `true` if the message was sent, otherwise `false`
-		bool send_can_message_raw(std::uint32_t portIndex,
-		                          std::uint8_t sourceAddress,
-		                          std::uint8_t destAddress,
-		                          std::uint32_t parameterGroupNumber,
-		                          std::uint8_t priority,
-		                          const void *data,
-		                          std::uint32_t size) const;
 
 		/// @brief Gets a PGN callback for the global address by index
 		/// @param[in] index The index of the callback to get
